@@ -13,7 +13,6 @@ author:         Author name here
 maintainer:     example@example.com
 copyright:      2023 Author name here
 license:        BSD3
-license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
@@ -25,7 +24,46 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Control.Effect.Class
+      Control.Effect.Class.Actor
+      Control.Effect.Class.Authentication
+      Control.Effect.Class.Client
+      Control.Effect.Class.Concurrent
+      Control.Effect.Class.Constraint
+      Control.Effect.Class.Continuation
+      Control.Effect.Class.Counter
+      Control.Effect.Class.Database
+      Control.Effect.Class.Delimited
+      Control.Effect.Class.Email
+      Control.Effect.Class.Environment
+      Control.Effect.Class.Exception
+      Control.Effect.Class.FileSystem
+      Control.Effect.Class.Fix
+      Control.Effect.Class.Identity
+      Control.Effect.Class.Input
+      Control.Effect.Class.IOE
+      Control.Effect.Class.Iter
+      Control.Effect.Class.Log
+      Control.Effect.Class.Loop
+      Control.Effect.Class.Metric
+      Control.Effect.Class.NonDet
+      Control.Effect.Class.Output
+      Control.Effect.Class.Parallel
+      Control.Effect.Class.Parser
+      Control.Effect.Class.Proxy
+      Control.Effect.Class.Quasi
+      Control.Effect.Class.Resource
+      Control.Effect.Class.Share
+      Control.Effect.Class.State
+      Control.Effect.Class.Supervisor
+      Control.Effect.Class.Tag
+      Control.Effect.Class.Teletype
+      Control.Effect.Class.Time
+      Control.Effect.Class.Transaction
+      Control.Effect.Class.Unique
+      Control.Effect.Class.Unit
+      Control.Effect.Class.Void
+      Control.Effect.Class.Web
   other-modules:
       Paths_effects
   hs-source-dirs:
