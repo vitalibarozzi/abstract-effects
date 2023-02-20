@@ -6,94 +6,38 @@ cabal-version: 1.12
 
 name:           effects
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/effects#readme>
-homepage:       https://github.com/githubuser/effects#readme
-bug-reports:    https://github.com/githubuser/effects/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2023 Author name here
-license:        BSD3
+homepage:       https://github.com/vitalibarozzi/effects#readme
+bug-reports:    https://github.com/vitalibarozzi/effects/issues
+author:         Joao Vitor Vitali Barozzi
+maintainer:     vitalivitor@gmail.com
+copyright:      2023 Joao Vitor Vitali Barozzi
+license:        MIT
 build-type:     Simple
-extra-source-files:
-    README.md
-    CHANGELOG.md
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/effects
+  location: https://github.com/vitalibarozzi/effects
 
 library
   exposed-modules:
-      Control.Effect.Class
-      Control.Effect.Class.Actor
-      Control.Effect.Class.Authentication
-      Control.Effect.Class.Client
-      Control.Effect.Class.Concurrent
-      Control.Effect.Class.Constraint
-      Control.Effect.Class.Continuation
-      Control.Effect.Class.Counter
-      Control.Effect.Class.Database
-      Control.Effect.Class.Delimited
-      Control.Effect.Class.Email
-      Control.Effect.Class.Environment
       Control.Effect.Class.Exception
-      Control.Effect.Class.FileSystem
-      Control.Effect.Class.Fix
-      Control.Effect.Class.Identity
       Control.Effect.Class.Input
       Control.Effect.Class.IOE
-      Control.Effect.Class.Iter
       Control.Effect.Class.Log
-      Control.Effect.Class.Loop
-      Control.Effect.Class.Metric
       Control.Effect.Class.NonDet
       Control.Effect.Class.Output
-      Control.Effect.Class.Parallel
       Control.Effect.Class.Parser
-      Control.Effect.Class.Proxy
-      Control.Effect.Class.Quasi
-      Control.Effect.Class.Resource
-      Control.Effect.Class.Share
       Control.Effect.Class.State
-      Control.Effect.Class.Supervisor
-      Control.Effect.Class.Tag
       Control.Effect.Class.Teletype
-      Control.Effect.Class.Time
-      Control.Effect.Class.Transaction
-      Control.Effect.Class.Unique
-      Control.Effect.Class.Unit
-      Control.Effect.Class.Void
-      Control.Effect.Class.Web
+      Control.Monad.Effects
   other-modules:
       Paths_effects
   hs-source-dirs:
       src
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  default-extensions:
+      MultiParamTypeClasses
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wno-redundant-constraints
   build-depends:
       base >=4.7 && <5
-  default-language: Haskell2010
-
-executable effects-exe
-  main-is: Main.hs
-  other-modules:
-      Paths_effects
-  hs-source-dirs:
-      app
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , effects
-  default-language: Haskell2010
-
-test-suite effects-test
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  other-modules:
-      Paths_effects
-  hs-source-dirs:
-      test
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , effects
+    , text
   default-language: Haskell2010

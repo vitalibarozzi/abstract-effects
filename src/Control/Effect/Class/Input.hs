@@ -1,21 +1,32 @@
-module Control.Effect.Class.Input where
+module Control.Effect.Class.Input (Input(..), lazyIngest) where
 
 
 class Input i m where
     ingest :: m i
 
-ingests 
+instance {-# OVERLAPPABLE #-} (Input i m) => Input [i] m where
+    ingest = undefined 
+
+
+withInput 
     :: ( Monad m
        , Input i m
        ) 
-    => (i -> a) 
+    => (i -> m a) 
     -> m a
-ingests f = 
+withInput f = 
     ingest >>= f
 
 
-ingestN :: (Integral n, Input i m) => n -> m [i]
-ingestN n = undefined
+lazyIngest :: (Input i m) => m [i]
+lazyIngest = undefined
+
+
+{-
+
+
+
 
 
 -- local cannot be defined without access to the interpreter medium
+-}

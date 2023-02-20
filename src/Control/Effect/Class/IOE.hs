@@ -1,20 +1,20 @@
 module Control.Effect.Class.IOE
-    ( ToIO (..)
-    , FromIO (..)
+
+    ( MonadIO
+    , liftIO
+
+    , FromIO
+    , fromIO
     )
 where
 
-class ToIO m where
-    toIO :: m a -> IO a 
-
-
-instance ToIO IO where
-    toIO = id
+import Control.Monad.IO.Class
 
 
 class FromIO m where
     fromIO :: IO a -> m a
 
 
-instance FromIO IO where
+instance {-# OVERLAPPABLE #-} FromIO IO where
+    {-# INLINE fromIO #-}
     fromIO = id

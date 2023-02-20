@@ -1,19 +1,37 @@
-module Control.Effect.Class.State where
+module Control.Effect.Class.State 
+    ( State(..)
+    , gets
+    , modify
+    , modifyM
+    , withState
+    ) 
+where
+
 
 class State s m where
     get :: m s
     put :: s -> m ()
 
 
-gets :: (State s m) => (s -> a) -> m a
-gets = undefined
+gets :: (Functor m, State s m) => (s -> a) -> m a
+gets l = do
+    fmap l get
 
 
-modify :: (State s m) => (s -> s) -> m ()
-modify = undefined
+modify :: (Monad m, State s m) => (s -> s) -> m ()
+modify k = do
+    s <- get
+    put (k s)
 
 
-withState :: (State s m) => (s -> s) -> (m a -> m a)
+modifyM :: (Monad m, State s m) => (s -> m s) -> m ()
+modifyM k = do
+    s <- get
+    res <- k s
+    put res
+
+
+withState :: (Monad m, State s m) => (s -> s) -> (m a -> m a)
 withState f ma = do
     s <- get
     put (f s)

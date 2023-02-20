@@ -1,9 +1,7 @@
-module Control.Effect.Class.Output where
-
+module Control.Effect.Class.Output (Output, produce) where
 
 class Output o m where
-    tell :: o -> m ()
+    produce :: o -> m ()
 
-
--- may not be definable here without the handlers, or better saying, the handler is this decision
-listen = undefined
+instance {-# OVERLAPPABLE #-} (Monad m, Output o m) => Output [o] m where
+    produce = mapM_ produce
