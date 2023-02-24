@@ -4,6 +4,7 @@ module Control.Effect.Class.Log
     )
 where
 
+
 import Prelude hiding (log)
 
 

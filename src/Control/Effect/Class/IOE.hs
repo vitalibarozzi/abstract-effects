@@ -1,8 +1,8 @@
 module Control.Effect.Class.IOE
-
-    ( MonadIO
+    ( -- * 
+      MonadIO
     , liftIO
-
+      -- *
     , FromIO
     , fromIO
     )
