@@ -4,6 +4,7 @@ module Control.Monad.Effects
     , module Control.Effect.Class.State
     , module Control.Effect.Class.Input
     , module Control.Effect.Class.Output
+    , module Control.Effect.Class.Partial
     , module Control.Effect.Class.Exception
     , module Control.Effect.Class.NonDet
     -- * Thematic
@@ -17,6 +18,7 @@ import Control.Effect.Class.IOE
 import Control.Effect.Class.State
 import Control.Effect.Class.Input
 import Control.Effect.Class.Output
+import Control.Effect.Class.Partial
 import Control.Effect.Class.Exception
 import Control.Effect.Class.NonDet
 -- Thematic

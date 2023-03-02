@@ -1,6 +1,5 @@
 module Control.Effect.Class.Log
-    ( logM
-    , Log
+    ( Log(..)
     )
 where
 
@@ -9,4 +8,6 @@ import Prelude hiding (log)
 
 
 class Log l m where
-    logM :: l -> m ()
+    logInfo  :: l -> m ()
+    logWarn  :: l -> m ()
+    logError :: l -> m ()

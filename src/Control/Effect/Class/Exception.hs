@@ -3,12 +3,19 @@
 module Control.Effect.Class.Exception 
     ( Error(..)
     , Exception
+    , throw
     ) 
 where
 
 
 import Control.Exception hiding (throw)
+import Data.Void (Void, absurd)
 
 
 class Error e m where
-    throw :: (Exception e) => e -> m a
+    throwVoid :: (Exception e) => e -> m Void
+
+
+throw :: (Error e m, Exception e, Functor m) => e -> m a 
+{-# INLINE throw #-}
+throw e = fmap absurd (throwVoid e)

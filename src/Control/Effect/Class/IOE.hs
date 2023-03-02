@@ -1,10 +1,8 @@
 module Control.Effect.Class.IOE
     ( -- * 
-      MonadIO
-    , liftIO
+      MonadIO(..)
       -- *
-    , FromIO
-    , fromIO
+    , FromIO(..)
     )
 where
 

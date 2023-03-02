@@ -27,6 +27,7 @@ library
       Control.Effect.Class.NonDet
       Control.Effect.Class.Output
       Control.Effect.Class.Parser
+      Control.Effect.Class.Partial
       Control.Effect.Class.State
       Control.Effect.Class.Teletype
       Control.Monad.Effects
