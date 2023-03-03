@@ -1,10 +1,6 @@
 module Control.Effect.Class.Teletype 
-    ( Teletype
-    , printLine
-    , readLine
-    , TeletypeLower
-    , printChar
-    , readChar
+    ( Teletype(..)
+    , TeletypeLower(..)
     ) 
 where
 
