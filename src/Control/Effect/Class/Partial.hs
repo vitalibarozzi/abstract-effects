@@ -10,7 +10,7 @@ module Control.Effect.Class.Partial
 where
 
 import Data.Void (absurd, Void)
-import Control.Exception qualified as Exception
+--import Control.Exception qualified as Exception
 
 
 -- | This class is used to prove that the
@@ -50,7 +50,7 @@ instance Partial [] where
     nullary [] = return True
     nullary (_ : _) = return False
 
-
+{-
 instance Partial IO where
     {-# INLINE partial #-}
     partial = error "todo"
@@ -61,3 +61,4 @@ instance Partial IO where
             (\(e :: Exception.SomeException) -> return True)
 data PartialIOException = PartialIOException deriving (Show)
 instance Exception.Exception PartialIOException
+-}

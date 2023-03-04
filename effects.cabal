@@ -24,9 +24,9 @@ library
       Control.Effect.Class.Input
       Control.Effect.Class.IOE
       Control.Effect.Class.Log
-      Control.Effect.Class.NonDet
       Control.Effect.Class.Output
       Control.Effect.Class.Partial
+      Control.Effect.Class.Random
       Control.Effect.Class.State
       Control.Effect.Class.Teletype
       Control.Monad.Effects
