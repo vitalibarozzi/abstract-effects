@@ -1,44 +1,53 @@
 module Control.Effect.Class.State 
     ( State(..)
+    , get
+    , put
     , gets
     , modify
     , modifyM
-    , withState
+    , withLocal
     ) 
 where
 
+import Control.Monad
+
 
 class State s m where
-    get :: m s
-    put :: s -> m ()
+    withGet :: (s -> m a) -> m a
+    withPut :: m a -> (s -> m a)
 
 
-gets :: (Functor m, State s m) => (s -> a) -> m a
+get :: (State s m, Applicative m) => m s
+{-# INLINE get #-}
+get = 
+    withGet pure
+
+
+put :: (State s m, Applicative m) => s -> m ()
+{-# INLINE put #-}
+put = 
+    withPut (pure ())
+
+
+gets :: (State s m, Applicative m) => (s -> a) -> m a
 {-# INLINE gets #-}
-gets l = do
-    fmap l get
+gets l =
+    withGet (pure . l)
 
 
 modify :: (Monad m, State s m) => (s -> s) -> m ()
 {-# INLINE modify #-}
-modify k = do
-    s <- get
-    put (k s)
+modify k =
+    withGet (withPut (pure ()) . k)
 
 
 modifyM :: (Monad m, State s m) => (s -> m s) -> m ()
 {-# INLINE modifyM #-}
-modifyM k = do
-    s <- get
-    res <- k s
-    put res
+modifyM k =
+    withGet (withPut (pure ()) <=< k)
 
 
-withState :: (Monad m, State s m) => (s -> s) -> (m a -> m a)
-{-# INLINE withState #-}
-withState f ma = do
-    s <- get
-    put (f s)
-    a <- ma
-    put s
-    return a
+withLocal :: (Monad m, State s m) => (s -> s) -> (m a -> m a)
+{-# INLINE withLocal #-}
+withLocal f ma =
+    withGet (withPut ma . f)

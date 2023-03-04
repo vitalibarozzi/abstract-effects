@@ -28,6 +28,7 @@ library
       Control.Effect.Class.Output
       Control.Effect.Class.Partial
       Control.Effect.Class.Random
+      Control.Effect.Class.Resource
       Control.Effect.Class.State
       Control.Effect.Class.Teletype
       Control.Effect.Class.Time
