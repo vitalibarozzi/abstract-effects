@@ -20,9 +20,10 @@ class (Monad m) => Partial m where
     partial :: m Void
     nullary :: m a -> m Bool
 
+    -- TODO review this
     {-# INLINE recover #-}
     recover :: m a -> (m Void -> m a) -> m a
-    recover ma f = do isNull <- nullary ma; if isNull then f partial else ma
+    recover ma f = do isNull <- nullary ma; if isNull then f ma else ma
 
 
 -- | Like a `Nothing` in the `Maybe` monad or an empty 
@@ -49,16 +50,3 @@ instance Partial [] where
     {-# INLINE nullary #-}
     nullary [] = return True
     nullary (_ : _) = return False
-
-{-
-instance Partial IO where
-    {-# INLINE partial #-}
-    partial = error "todo"
-    {-# INLINE nullary #-}
-    nullary ma = 
-        Exception.catch 
-            (fmap (const False) ma) 
-            (\(e :: Exception.SomeException) -> return True)
-data PartialIOException = PartialIOException deriving (Show)
-instance Exception.Exception PartialIOException
--}

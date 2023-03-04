@@ -4,19 +4,20 @@
 module Control.Effect.Class.Except
     ( Except(..)
     , throw
+    , catchBy
     -- | Reexport
     , Exception
     ) 
 where
 
 
-import Control.Exception (Exception,SomeException(..))
+import Control.Exception (Exception,)
 import Data.Void (Void, absurd)
 
 
 class (Exception e) => Except e m where
-    voidThrow :: e -> m Void
-    catch     :: (e -> m a) -> m a -> m a
+    bottom :: e -> m Void
+    catch  :: (e -> m a) -> (m a -> m a)
 
 
 {-# HLINT ignore #-}
@@ -27,13 +28,13 @@ catchBy = flip catch
 
 throw :: (Except e m, Functor m) => e -> m a 
 {-# INLINE throw #-}
-throw e = fmap absurd (voidThrow e)
+throw = fmap absurd . bottom
 
 
 -- Orphans
 
 
 instance (Exception e) => Except e Maybe where
-    voidThrow _ = Nothing
-    catch f Nothing  = f undefined 
-    catch f (Just a) = Just a
+    bottom _ = Nothing
+    catch f Nothing  = f undefined  -- TODO
+    catch _ (Just a) = Just a

@@ -9,6 +9,7 @@ copyright:           "2023 Joao Vitor Vitali Barozzi"
 dependencies:
 - base >= 4.7 && < 5
 - text
+- time
 
 default-extensions:
 - MultiParamTypeClasses
