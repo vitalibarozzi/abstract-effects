@@ -3,6 +3,9 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 module Control.Effect.Class.Except
     ( Except(..)
+    , Error
+    , Fail
+    , fail
     , throw
     , catchBy
     -- | Reexport
@@ -11,21 +14,25 @@ module Control.Effect.Class.Except
 where
 
 
-import Control.Exception (Exception,)
+import Control.Exception (Exception,SomeException)
 import Data.Void (Void, absurd)
 
 
-class (Exception e) => Except e m where
-    except :: e -> m Void
-    catch  :: (e -> m a) -> (m a -> m a)
+type Fail = MonadFail
+type Error m = Except SomeException m
+
+
+class Except e m where
+    except :: (Exception e) => e -> m Void
+    catch  :: (Exception e) => (e -> m a) -> (m a -> m a)
 
 
 {-# HLINT ignore #-}
-catchBy :: (Except e m) => m a -> (e -> m a) -> m a
+catchBy :: (Exception e, Except e m) => m a -> (e -> m a) -> m a
 {-# INLINE catchBy #-}
 catchBy = flip catch
 
 
-throw :: (Except e m, Functor m) => e -> m a 
+throw :: (Exception e, Except e m, Functor m) => e -> m a 
 {-# INLINE throw #-}
 throw = fmap absurd . except

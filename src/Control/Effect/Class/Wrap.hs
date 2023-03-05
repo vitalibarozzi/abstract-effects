@@ -1,12 +1,19 @@
 {-# LANGUAGE ImplicitParams #-}
-module Control.Effect.Class.Wrap 
+module Control.Effect.Class.Program 
 where
+
+
+import Data.Functor.Identity
+import Control.Monad.Effects.Helpers
+
 
 -- maybe?
 
-class Wrap m where
-    wrap :: a -> m a
+
+class Program m n where
+    run :: m ~> n
 
 
-class Unwrap m where
-    unwrap :: m a -> a
+instance Program m m where
+    {-# INLINE run #-}
+    run = id
