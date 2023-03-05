@@ -20,18 +20,22 @@ source-repository head
 
 library
   exposed-modules:
+      Control.Effect.Class.Concurrent
       Control.Effect.Class.Except
       Control.Effect.Class.FileSystem
       Control.Effect.Class.Input
       Control.Effect.Class.IOE
+      Control.Effect.Class.Join
       Control.Effect.Class.Log
       Control.Effect.Class.Output
       Control.Effect.Class.Partial
       Control.Effect.Class.Random
       Control.Effect.Class.Resource
+      Control.Effect.Class.Split
       Control.Effect.Class.State
       Control.Effect.Class.Teletype
       Control.Effect.Class.Time
+      Control.Effect.Class.Wrap
       Control.Monad.Effects
   other-modules:
       Paths_effects

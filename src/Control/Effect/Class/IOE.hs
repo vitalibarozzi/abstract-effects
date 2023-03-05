@@ -1,5 +1,5 @@
 module Control.Effect.Class.IOE
-    ( -- * 
+    ( -- * Reexport 
       MonadIO(..)
       -- *
     , FromIO(..)

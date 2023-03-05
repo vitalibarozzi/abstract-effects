@@ -6,52 +6,52 @@ where
 
 
 class Random a m where
-    roll :: m a
+    random :: m a
 
 
 instance (Monad m, Random a m) => Random [a] m where
-    {-# INLINE roll #-}
-    roll = do
-        i0 <- roll
-        is <- roll
+    {-# INLINE random #-}
+    random = do
+        i0 <- random
+        is <- random
         return (i0 : is)
 
 
 instance (Monad m, Random a m) => Random (a,a) m where
-    {-# INLINE roll #-}
-    roll = do
-        i0 <- roll
-        i1 <- roll
+    {-# INLINE random #-}
+    random = do
+        i0 <- random
+        i1 <- random
         return (i0, i1)
 
 
 instance (Monad m, Random a m) => Random (a,a,a) m where
-    {-# INLINE roll #-}
-    roll = do
-        i0 <- roll
-        (i1, i2) <- roll
+    {-# INLINE random #-}
+    random = do
+        i0 <- random
+        (i1, i2) <- random
         return (i0, i1, i2)
 
 
 instance (Monad m, Random a m) => Random (a,a,a,a) m where
-    {-# INLINE roll #-}
-    roll = do
-        i0 <- roll
-        (i1, i2, i3) <- roll
+    {-# INLINE random #-}
+    random = do
+        i0 <- random
+        (i1, i2, i3) <- random
         return (i0, i1, i2, i3)
 
 
 instance (Monad m, Random a m) => Random (a,a,a,a,a) m where
-    {-# INLINE roll #-}
-    roll = do
-        i0 <- roll
-        (i1, i2, i3, i4) <- roll
+    {-# INLINE random #-}
+    random = do
+        i0 <- random
+        (i1, i2, i3, i4) <- random
         return (i0, i1, i2, i3, i4)
 
 
 instance (Monad m, Random a m) => Random (a,a,a,a,a,a) m where
-    {-# INLINE roll #-}
-    roll = do
-        i0 <- roll
-        (i1, i2, i3, i4, i5) <- roll
+    {-# INLINE random #-}
+    random = do
+        i0 <- random
+        (i1, i2, i3, i4, i5) <- random
         return (i0, i1, i2, i3, i4, i5)

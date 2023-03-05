@@ -16,7 +16,7 @@ import Data.Void (Void, absurd)
 
 
 class (Exception e) => Except e m where
-    bottom :: e -> m Void
+    except :: e -> m Void
     catch  :: (e -> m a) -> (m a -> m a)
 
 
@@ -28,13 +28,4 @@ catchBy = flip catch
 
 throw :: (Except e m, Functor m) => e -> m a 
 {-# INLINE throw #-}
-throw = fmap absurd . bottom
-
-
--- Orphans
-
-
-instance (Exception e) => Except e Maybe where
-    bottom _ = Nothing
-    catch f Nothing  = f undefined  -- TODO
-    catch _ (Just a) = Just a
+throw = fmap absurd . except

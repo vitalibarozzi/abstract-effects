@@ -13,7 +13,9 @@ import Data.Text
 
 
 class Log l m where
-    logger :: ((Text -> m ()) -> l -> m ()) -> (l -> m ())
+    logger 
+        :: ((Text -> m ()) -> (l -> m ())) -- ^ Given a logger function of type `Text -> m ()`, we return `l -> m ()` implying that `l` will be turned into `Text` by the client.
+        -> (l -> m ())
 
 
 logI :: (Show i, Log i m) => i -> m ()

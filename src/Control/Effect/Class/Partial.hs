@@ -18,12 +18,11 @@ import Data.Void (absurd, Void)
 -- E.g: the partial value for `Maybe` is `Nothing`.
 class (Monad m) => Partial m where
     partial :: m Void
-    nullary :: m a -> m Bool
+    isPartial :: m a -> Bool
 
-    -- TODO review this
     {-# INLINE recover #-}
-    recover :: m a -> (m Void -> m a) -> m a
-    recover ma f = do isNull <- nullary ma; if isNull then f ma else ma
+    recover :: m a -> (m a -> m a) -> m a
+    recover ma f = if isPartial ma then f ma else ma
 
 
 -- | Like a `Nothing` in the `Maybe` monad or an empty 
@@ -39,14 +38,14 @@ nil = fmap absurd partial
 instance Partial Maybe where 
     {-# INLINE partial #-}
     partial = Nothing
-    {-# INLINE nullary #-}
-    nullary Nothing = return True
-    nullary (Just _) = return False
+    {-# INLINE isPartial #-}
+    isPartial Nothing = True
+    isPartial (Just _) = False
 
 
 instance Partial [] where
     {-# INLINE partial #-}
     partial = []
-    {-# INLINE nullary #-}
-    nullary [] = return True
-    nullary (_ : _) = return False
+    {-# INLINE isPartial #-}
+    isPartial [] = True
+    isPartial (_ : _) = False

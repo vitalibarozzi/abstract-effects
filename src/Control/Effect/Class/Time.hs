@@ -13,7 +13,7 @@ where
 import Data.Time
 
 
-class Monad m => Time m where
+class Time m where
     withTime :: (HasTime m => m a) -> m a
 
 
@@ -33,8 +33,10 @@ type HasTime m = ?timeEnv :: (UTCTime, m UTCTime)
 
 
 -- | Helper used to define a `withTime` function in the
--- `Time` instantiation.
-setTime :: (Monad m) => m UTCTime -> (HasTime m => m ())
+-- `Time` class instantiation.
+setTime 
+    :: (Monad m) 
+    => m UTCTime -> (HasTime m => m ())
 setTime getTime = do
     t0 <- getTime 
     let ?timeEnv = (t0, getTime)
