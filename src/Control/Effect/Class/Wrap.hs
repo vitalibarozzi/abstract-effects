@@ -10,6 +10,18 @@ import Control.Monad.Effects.Helpers
 -- maybe?
 
 
+class Constrainer k m where
+    internalize :: (k => m a) -> m a
+    externalize :: m a -> (k => m a)
+
+
+instance Constrainer () m where
+    internalize = id
+    externalize = id
+
+
+
+
 class Program m n where
     run :: m ~> n
 

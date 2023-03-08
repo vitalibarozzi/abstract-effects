@@ -8,6 +8,8 @@ where
 import Data.Text
 
 
+-- | Abstract "teletype"/"terminal" effect. Used typically to 
+-- print and read from the "console"/"command-line".
 class Teletype m where
     printLine :: Text -> m ()
     readLine  :: m Text

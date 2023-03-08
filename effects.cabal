@@ -30,10 +30,16 @@ library
       Control.Effect.Class.Generic
       Control.Effect.Class.Input
       Control.Effect.Class.IO
+      Control.Effect.Class.Iterator
       Control.Effect.Class.Join
       Control.Effect.Class.Log
+      Control.Effect.Class.Loop
+      Control.Effect.Class.Metric
       Control.Effect.Class.Output
+      Control.Effect.Class.Parser
       Control.Effect.Class.Partial
+      Control.Effect.Class.Product
+      Control.Effect.Class.Quasi
       Control.Effect.Class.Random
       Control.Effect.Class.Resource
       Control.Effect.Class.Split
@@ -44,7 +50,6 @@ library
       Control.Effect.Class.Test
       Control.Effect.Class.Time
       Control.Effect.Class.Wrap
-      Control.Effect.Class.Zip
       Control.Monad.Effects
       Control.Monad.Effects.Helper
   other-modules:

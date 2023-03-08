@@ -3,14 +3,12 @@
 module Control.Effect.Class.Partial 
     ( Partial(..)
     , nil
-    -- * Reexport
+    , recover
     , Void
-    , absurd
     )
 where
 
 import Data.Void (absurd, Void)
---import Control.Exception qualified as Exception
 
 
 -- | This class is used to prove that the
@@ -18,34 +16,44 @@ import Data.Void (absurd, Void)
 -- E.g: the partial value for `Maybe` is `Nothing`.
 class (Monad m) => Partial m where
     partial :: m Void
-    isPartial :: m a -> Bool
-
-    {-# INLINE recover #-}
-    recover :: m a -> (m a -> m a) -> m a
-    recover ma f = if isPartial ma then f ma else ma
+    attempt :: m a -> Either (m Void) (m a)
 
 
 -- | Like a `Nothing` in the `Maybe` monad or an empty 
 -- list in the list type.
-nil :: (Partial m, Functor m) => m a
+nil :: (Partial m) => m a
 {-# INLINE nil #-}
 nil = fmap absurd partial
 
 
--- Orphans
+recover :: (Partial m) => (m Void -> m a) -> (m a -> m a)
+{-# INLINE recover #-}
+recover f ma =
+    either f id (attempt ma)
 
 
+{-
 instance Partial Maybe where 
     {-# INLINE partial #-}
     partial = Nothing
-    {-# INLINE isPartial #-}
-    isPartial Nothing = True
-    isPartial (Just _) = False
+    {-# INLINE attempt #-}
+    attempt = \case
+        Nothing -> Left Nothing
+        Just  a -> Right (Just a)
 
 
 instance Partial [] where
     {-# INLINE partial #-}
     partial = []
-    {-# INLINE isPartial #-}
-    isPartial [] = True
-    isPartial (_ : _) = False
+    {-# INLINE attempt #-}
+    attempt = \case
+        [] -> Left []
+        as -> Right as
+
+
+instance Except e IO where
+    {-# INLINE err #-}
+    err = throwIO
+    {-# INLINE try #-}
+    try io = undefined
+-}

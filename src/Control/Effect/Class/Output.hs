@@ -9,6 +9,8 @@ class Output o m where
     output :: o -> m ()
 
 
+-- | Lazy list as output.
+-- TODO test it
 instance (Monad m, Output o m) => Output [o] m where
     {-# INLINE output #-}
     output [] = return ()

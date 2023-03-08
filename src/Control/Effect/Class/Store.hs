@@ -1,13 +1,10 @@
 module Control.Effect.Class.Store 
 where
 
-import Control.Monad
 
-
-class Store ix a m where
-    store :: ix -> (a -> m ())
-    fetch :: ix -> m a
-
+class Store key s m where
+    store :: key -> (forall a. (s -> m a) -> m a)
+    fetch :: key -> (forall a. m a -> (s -> m a))
 
 
 class Lolwhat k m where

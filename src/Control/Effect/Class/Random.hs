@@ -9,6 +9,8 @@ class Random a m where
     random :: m a
 
 
+-- | Lazy list.
+-- TODO test it
 instance (Monad m, Random a m) => Random [a] m where
     {-# INLINE random #-}
     random = do

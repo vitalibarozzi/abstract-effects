@@ -1,13 +1,10 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-module Control.Effect.Class.Zip
-    ()
+module Control.Effect.Class.Product
+    ( Product(..)
+    )
 where
-
-
-import Control.Exception (Exception,SomeException)
-import Data.Void (Void, absurd)
 
 
 class Product m where

@@ -7,7 +7,7 @@ module Control.Effect.Class.Except
     , Fail
     , fail
     , throw
-    , catchBy
+    , catch
     -- | Reexport
     , Exception
     ) 
@@ -22,17 +22,47 @@ type Fail = MonadFail
 type Error m = Except SomeException m
 
 
-class Except e m where
-    except :: (Exception e) => e -> m Void
-    catch  :: (Exception e) => (e -> m a) -> (m a -> m a)
+class (Monad m) => Except e m where
+    err :: (Exception e) => e -> m Void
+    try :: (Exception e) => m a -> Either (m e) (m a)
 
 
-{-# HLINT ignore #-}
-catchBy :: (Exception e, Except e m) => m a -> (e -> m a) -> m a
-{-# INLINE catchBy #-}
-catchBy = flip catch
-
-
-throw :: (Exception e, Except e m, Functor m) => e -> m a 
+throw :: (Except e m, Exception e) => e -> m a 
 {-# INLINE throw #-}
-throw = fmap absurd . except
+throw = 
+    fmap absurd . err
+
+
+catch :: (Except e m, Exception e) => (m e -> m a) -> (m a -> m a)
+{-# INLINE catch #-}
+catch f ma =
+    either f id (try ma)
+
+
+{-
+instance Except e Maybe where 
+    {-# INLINE err #-}
+    err _ = Nothing
+    {-# INLINE try #-}
+    try = \case
+        Nothing -> Left Nothing
+        Just as -> Right (Just as)
+
+
+instance Except e [] where
+    {-# INLINE err #-}
+    err _ = []
+    {-# INLINE try #-}
+    try = \case
+        [] -> Left []
+        as -> Right as
+
+
+instance Except e IO where
+    {-# INLINE err #-}
+    err = throwIO
+    {-# INLINE try #-}
+    try io = undefined
+-}
+
+
