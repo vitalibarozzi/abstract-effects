@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Control.Effect.Class.System 
     ( System(..)
     ) 
@@ -28,8 +29,13 @@ class System m where
     compilerVersion = pure System.Info.compilerVersion
 
     applicationCompiledAt :: (Applicative m) => m UTCTime
+    {-# INLINE applicationCompiledAt  #-}
     applicationCompiledAt = undefined -- TODO
 
     applicationVersion :: (Applicative m) => m Version
+    {-# INLINE applicationVersion   #-}
     applicationVersion = undefined -- TODO
 
+    applicationDescription :: (Applicative m) => m Text
+    {-# INLINE applicationDescription    #-}
+    applicationDescription = pure "No description given."

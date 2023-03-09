@@ -30,30 +30,3 @@ recover :: (Partial m) => (m Void -> m a) -> (m a -> m a)
 {-# INLINE recover #-}
 recover f ma =
     either f id (attempt ma)
-
-
-{-
-instance Partial Maybe where 
-    {-# INLINE partial #-}
-    partial = Nothing
-    {-# INLINE attempt #-}
-    attempt = \case
-        Nothing -> Left Nothing
-        Just  a -> Right (Just a)
-
-
-instance Partial [] where
-    {-# INLINE partial #-}
-    partial = []
-    {-# INLINE attempt #-}
-    attempt = \case
-        [] -> Left []
-        as -> Right as
-
-
-instance Except e IO where
-    {-# INLINE err #-}
-    err = throwIO
-    {-# INLINE try #-}
-    try io = undefined
--}

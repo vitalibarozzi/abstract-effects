@@ -37,32 +37,3 @@ catch :: (Except e m, Exception e) => (m e -> m a) -> (m a -> m a)
 {-# INLINE catch #-}
 catch f ma =
     either f id (try ma)
-
-
-{-
-instance Except e Maybe where 
-    {-# INLINE err #-}
-    err _ = Nothing
-    {-# INLINE try #-}
-    try = \case
-        Nothing -> Left Nothing
-        Just as -> Right (Just as)
-
-
-instance Except e [] where
-    {-# INLINE err #-}
-    err _ = []
-    {-# INLINE try #-}
-    try = \case
-        [] -> Left []
-        as -> Right as
-
-
-instance Except e IO where
-    {-# INLINE err #-}
-    err = throwIO
-    {-# INLINE try #-}
-    try io = undefined
--}
-
-

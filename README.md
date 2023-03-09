@@ -1,7 +1,8 @@
 # Abstract effects collection
 
-Collection of computational effects somewhat opinionated but with no particular implementation.
-In other words, it contains class definitions with no instances so it can be instantiated for
+Collection of computational effects with no particular implementation.
+
+In other words, it contains classes definitions with no instances so it can be instantiated for
 any monadic kind of type, so it has classes where the kind ends in:
 
 ```haskell

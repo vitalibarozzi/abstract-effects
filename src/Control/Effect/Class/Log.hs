@@ -28,8 +28,3 @@ logW = logger (\logFn w -> logFn ("warning: "<>pack (show w)))
 
 logE :: (Show e, Log e m) => e -> m ()
 logE = logger (\logFn e -> logFn ("error: "<>pack (show e)))
-
-
--- | Example.
---instance (MonadIO m) => Log Text m where
---    logger k = k (liftIO . putStrLn . unpack)

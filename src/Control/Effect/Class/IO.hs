@@ -1,23 +1,20 @@
 module Control.Effect.Class.IO
     ( -- *
-      FromIO(..)
+      ToIO(..)
+    , FromIO(..)
     -- * Reexport 
     , MonadIO(..)
-    , ToIO
     )
 where
 
 import Control.Monad.IO.Class
-import Control.Monad.Effects.Helpers
 
 
-type ToIO = MonadIO
+-- | MonadIO alias.
+class ToIO m where
+    toIO :: m a -> IO a
 
 
+-- | UnliftIO alias.
 class FromIO m where
-    fromIO :: IO ~> m
-
-
-instance {-# OVERLAPPABLE #-} FromIO IO where
-    {-# INLINE fromIO #-}
-    fromIO = id
+    fromIO :: IO a -> m a
