@@ -12,6 +12,7 @@ where
 import Control.Monad
 
 
+-- | Typicall state monad, but the signature is written as so for sanatic reasons.
 class State s m where
     withGet :: (s -> m a) -> m a
     withPut :: m a -> (s -> m a)

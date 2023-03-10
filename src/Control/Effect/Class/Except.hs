@@ -3,9 +3,7 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 module Control.Effect.Class.Except
     ( Except(..)
-    , Error
     , Fail
-    , fail
     , throw
     , catch
     -- | Reexport
@@ -18,8 +16,7 @@ import Control.Exception (Exception,SomeException)
 import Data.Void (Void, absurd)
 
 
-type Fail = MonadFail
-type Error m = Except SomeException m
+type Fail m = Except SomeException m
 
 
 class (Monad m) => Except e m where

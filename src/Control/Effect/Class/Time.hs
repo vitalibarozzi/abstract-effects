@@ -15,6 +15,7 @@ import Data.Time
 import Data.Kind
 
 
+-- TODO move the functionality out of the implicit params and make it abstract with methods in the class, if so
 class Time m where
     withTime :: ((HasTime m) => m a) -> m a
     withTimeout :: NominalDiffTime -> ((HasTime m) => m a) -> m a

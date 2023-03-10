@@ -13,12 +13,14 @@ class Exit m where
 
 
 exit :: (Exit m, Functor m) => m a
+{-# INLINE exit #-}
 exit = fmap absurd (exitWith 0)
 
 
 exitFailure :: (Exit m, Functor m) => Word8 -> m a
+{-# INLINE exitFailure #-}
 exitFailure n = 
-    if n > 0 && n < 255
+    if n > 0
         then fmap absurd (exitWith n)
         else fmap absurd (exitWith 1)
 

@@ -2,6 +2,7 @@ module Control.Effect.Class.Store
 where
 
 
+-- | Similar to state, but parametized/indexed by a key.
 class Store key s m where
-    store :: key -> (forall a. (s -> m a) -> m a)
-    fetch :: key -> (forall a. m a -> (s -> m a))
+    store :: key -> (s -> m a) -> m a
+    fetch :: key -> m a -> (s -> m a)
