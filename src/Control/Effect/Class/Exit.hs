@@ -8,6 +8,7 @@ where
 import Data.Void
 import Data.Word
 
+
 class Exit m where
     exitWith :: Word8 -> m Void
 

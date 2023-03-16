@@ -19,18 +19,21 @@ import Data.Void (Void, absurd)
 type Fail m = Except SomeException m
 
 
-class (Monad m) => Except e m where
-    err :: (Exception e) => e -> m Void
-    try :: (Exception e) => m a -> Either (m e) (m a)
+class 
+    (Monad m, Exception e) 
+    => Except e m 
+  where
+    err :: m e -> m Void
+    try :: m a -> Either (m e) (m a) -- TODO this make this class not algebraic, i guess?
 
 
-throw :: (Except e m, Exception e) => e -> m a 
+throw :: (Except e m) => e -> m a 
 {-# INLINE throw #-}
 throw = 
-    fmap absurd . err
+    undefined -- fmap absurd . err
 
 
-catch :: (Except e m, Exception e) => (m e -> m a) -> (m a -> m a)
+catch :: (Except e m) => (m e -> m a) -> (m a -> m a)
 {-# INLINE catch #-}
 catch f ma =
     either f id (try ma)

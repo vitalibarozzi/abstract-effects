@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Control.Effect.Class.Teletype 
+module Control.Effect.Class.Terminal 
     ( Terminal(..)
     ) 
 where

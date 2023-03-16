@@ -3,11 +3,6 @@
 {-# LANGUAGE AllowAmbiguousTypes #-}
 module Control.Effect.Class.Time 
     ( Time(..)
-    , withStaticTime
-    , setTime
-    , initial
-    , current
-    , elapsed
     ) 
 where
 
@@ -15,8 +10,63 @@ import Data.Time
 import Data.Kind
 
 
+data TimeContext m = TimeContext
+    { initialTime :: UTCTime
+    , currentTime :: m UTCTime
+    , timeoutTime :: Maybe UTCTime
+    , subTime     :: Maybe LocalTimeContext
+    }
+
+
+data LocalTimeContext = LocalTimeContext
+    { subInitialTime :: NominalDiffTime
+    , subCurrentTime :: NominalDiffTime
+    , subTimeoutTime :: Maybe NominalDiffTime
+    , subSubTime     :: Maybe LocalTimeContext
+    }
+
+
 -- TODO move the functionality out of the implicit params and make it abstract with methods in the class, if so
-class Time m where
+class (Monad m) => Time m where
+    timeContext :: TimeContext m
+    withLocalTime :: (LocalTimeContext -> m a) -> m a
+    withTimeout :: Int -> m a -> (m a -> m a)
+
+
+startedAt :: (Time m) => m UTCTime
+{-# INLINE startedAt #-}
+startedAt = undefined -- withLocalTime (pure . subInitialTime)
+
+
+endingAt :: (Time m) => m (Maybe UTCTime)
+{-# INLINE endingAt #-}
+endingAt = undefined -- withTimeContext (pure . timeoutTime)
+
+
+now :: (Time m) => m UTCTime
+{-# INLINE now #-}
+now = undefined -- withTimeContext currentTime
+
+
+elapsed :: m NominalDiffTime
+{-# INLINE elapsed #-}
+elapsed = undefined
+
+
+remaining :: m NominalDiffTime
+{-# INLINE remaining #-}
+remaining = undefined
+
+
+
+
+
+
+
+
+
+
+{-
     withTime :: ((HasTime m) => m a) -> m a
     withTimeout :: NominalDiffTime -> ((HasTime m) => m a) -> m a
 
@@ -82,3 +132,4 @@ withStaticTime ma =
 
 
 type HasTime m = ?timeEnv :: (UTCTime, m UTCTime, Maybe UTCTime)
+-}
