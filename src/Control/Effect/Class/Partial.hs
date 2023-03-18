@@ -8,13 +8,20 @@ module Control.Effect.Class.Partial
     )
 where
 
+import Data.Either
+import Data.Functor
+import Prelude (id)
+import Control.Monad (Monad)
 import Data.Void (absurd, Void)
 
 
 -- | This class is used to prove that the
 -- functor `m` can produce nullary values.
 -- E.g: the partial value for `Maybe` is `Nothing`.
-class (Monad m) => Partial m where
+class 
+    (Monad m) 
+    => Partial m 
+  where
     partial :: m Void
     attempt :: m a -> Either (m Void) (m a)
 

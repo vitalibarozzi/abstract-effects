@@ -8,6 +8,7 @@ module Control.Effect.Class.IO
 where
 
 import Control.Monad.IO.Class
+import Prelude (IO)
 
 
 -- | MonadIO alias.

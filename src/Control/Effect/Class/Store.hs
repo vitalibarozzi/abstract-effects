@@ -1,8 +1,12 @@
 module Control.Effect.Class.Store 
+    ( Store(..)
+    )
 where
 
 
 -- | Similar to state, but parametized/indexed by a key.
-class Store key s m where
-    store :: key -> (s -> m a) -> m a
-    fetch :: key -> m a -> (s -> m a)
+class 
+    Store key val m 
+  where
+    fetch :: key -> m val
+    store :: key -> (val -> m ())

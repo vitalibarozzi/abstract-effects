@@ -1,5 +1,5 @@
 module Control.Effect.Class.Concurrent
-    ( Concurrent(..)
+    ( -- Concurrent(..)
     ) 
 where
 
@@ -10,4 +10,7 @@ import Control.Exception
 class Concurrent m where
     self :: m ThreadId
     fork :: m a -> m ThreadId
-    done :: (Exception e) => e -> ThreadId -> m ()
+    done :: (Exception e => e) -> ThreadId -> m ()
+
+
+--imDone = self >>= done (let x = x in x)

@@ -7,6 +7,8 @@ where
 
 import Data.Void
 import Data.Word
+import Data.Functor
+import Prelude ((>))
 
 
 class Exit m where

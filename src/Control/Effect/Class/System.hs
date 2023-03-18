@@ -9,6 +9,7 @@ import Data.Text
 import Data.Version
 import System.Info
 import Data.Time
+import Control.Applicative (Applicative, pure)
 
 
 class System m where
@@ -30,11 +31,11 @@ class System m where
 
     applicationCompiledAt :: (Applicative m) => m UTCTime
     {-# INLINE applicationCompiledAt  #-}
-    applicationCompiledAt = undefined -- TODO
+    applicationCompiledAt = let x = x in x -- TODO
 
     applicationVersion :: (Applicative m) => m Version
     {-# INLINE applicationVersion   #-}
-    applicationVersion = undefined -- TODO
+    applicationVersion = let x = x in x -- TODO
 
     applicationDescription :: (Applicative m) => m Text
     {-# INLINE applicationDescription    #-}
