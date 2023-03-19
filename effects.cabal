@@ -5,7 +5,7 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           effects
-version:        0.1.0.0
+version:        0.1.0.1
 homepage:       https://github.com/vitalibarozzi/effects#readme
 bug-reports:    https://github.com/vitalibarozzi/effects/issues
 author:         Joao Vitor Vitali Barozzi
@@ -20,27 +20,18 @@ source-repository head
 
 library
   exposed-modules:
-      Control.Effect.Class.Concurrent
-      Control.Effect.Class.Continuation
-      Control.Effect.Class.Either
       Control.Effect.Class.Except
       Control.Effect.Class.Exit
-      Control.Effect.Class.Fix
-      Control.Effect.Class.GUI
       Control.Effect.Class.Input
       Control.Effect.Class.IO
-      Control.Effect.Class.Iterator
       Control.Effect.Class.Log
       Control.Effect.Class.Output
-      Control.Effect.Class.Pair
       Control.Effect.Class.Partial
       Control.Effect.Class.Random
       Control.Effect.Class.State
       Control.Effect.Class.Store
       Control.Effect.Class.System
       Control.Effect.Class.Terminal
-      Control.Effect.Class.Time
-      Control.Effect.Class.TUI
       Control.Monad.Effects
       Control.Monad.Effects.Helper
   other-modules:

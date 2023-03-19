@@ -1,14 +1,16 @@
 {-# LANGUAGE UnicodeSyntax #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE ExplicitNamespaces #-}
-module Control.Monad.Effects.Helpers (type (~>)) where
-
-import Prelude
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE ConstraintKinds #-}
+{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FlexibleContexts #-}
+module Control.Monad.Effects.Helper (type (~>)) where
 
 -- these are probably not useful in here, where the functor is always the same
 
 type (~>) f g = ∀a. (f a -> g a)
 
+{-
 -- TODO ?
 class Effectful k m | m -> k where
     subsume :: (k m => m a) -> m a
@@ -37,3 +39,4 @@ qux = idk
 
 bar :: Monad ==> Functor => Functor m => m Bool
 bar = qux foo
+-}
