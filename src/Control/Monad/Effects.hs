@@ -11,6 +11,8 @@ module Control.Monad.Effects
     , module Control.Effect.Class.Store
     , module Control.Effect.Class.System
     , module Control.Effect.Class.Terminal
+    , module Control.Effect.Class.Transform
+    --
     , module Control.Monad.Effects.Helper
     )
 where
@@ -27,4 +29,6 @@ import Control.Effect.Class.State
 import Control.Effect.Class.Store
 import Control.Effect.Class.System
 import Control.Effect.Class.Terminal
+import Control.Effect.Class.Transform
+--
 import Control.Monad.Effects.Helper

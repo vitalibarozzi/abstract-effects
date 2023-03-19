@@ -32,6 +32,7 @@ library
       Control.Effect.Class.Store
       Control.Effect.Class.System
       Control.Effect.Class.Terminal
+      Control.Effect.Class.Transform
       Control.Monad.Effects
       Control.Monad.Effects.Helper
   other-modules:

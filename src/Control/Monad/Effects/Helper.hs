@@ -1,42 +1,33 @@
 {-# LANGUAGE UnicodeSyntax #-}
+{-# LANGUAGE MonoLocalBinds #-}
+{-# LANGUAGE UndecidableSuperClasses #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE FlexibleContexts #-}
-module Control.Monad.Effects.Helper (type (~>)) where
-
--- these are probably not useful in here, where the functor is always the same
-
+module Control.Monad.Effects.Helper where
 type (~>) f g = ∀a. (f a -> g a)
 
-{-
--- TODO ?
-class Effectful k m | m -> k where
-    subsume :: (k m => m a) -> m a
-    expose :: m a -> (k m => m a)
 
-class (==>) k l where
-    idk :: ∀m a. (k m => m a) -> (l m => m a)
-
-instance k ==> l where
-    idk _ = undefined
-
-instance Monad ==> Functor where
-    idk _ = undefined
-
--- TODO
-type (=~>) k l = ∀m a. (k m => m a) -> (l m => m a)
+-------------------------------------------
+-- ideas
+-------------------------------------------
 
 
-foo :: Monad m => m Bool
-foo = undefined
+class 
+    k :> f 
+  where
+    internalize :: ∀x. (k f => f x) -> f x
+    externalize :: ∀x. f x -> (k f => f x)
 
 
-qux :: Monad ==> Functor => Monad =~> Functor
-qux = idk
+-- | instance (k==>k) f where (==>) fx = fx
+class 
+    k ==> l
+  where
+    (==>) :: ∀f. ∀x. (k f => f x) -> (l f => f x)
 
 
-bar :: Monad ==> Functor => Functor m => m Bool
-bar = qux foo
--}
+-- | instance (f=~>f) k where (=~>) fga = fga
+class 
+    f =~> g
+ where
+    (=~>) :: ∀k. ∀x. (k f => f x) -> (k g => g x)
