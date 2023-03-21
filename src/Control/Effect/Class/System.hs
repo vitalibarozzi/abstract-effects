@@ -1,42 +1,69 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Control.Effect.Class.System 
-    ( System(..)
-    ) 
-where
-
+module Control.Effect.Class.System where
 
 import Data.Text
 import Data.Version
-import System.Info
 import Data.Time
-import Control.Applicative (Applicative, pure)
+import Control.Monad
 
 
-class System m where
-    os :: (Applicative m) => m Text
-    {-# INLINE os #-}
-    os = pure (pack System.Info.os)
+class 
+    (Monad f)
+    => System f 
+  where
+    withOS :: (Text -> f a) -> f a
+    {-# INLINE withOS #-}
+    withOS = let x = x in x -- pure (pack System.Info.os)
 
-    arch :: (Applicative m) => m Text
-    {-# INLINE arch #-}
-    arch = pure (pack System.Info.arch)
+    withArch :: (Text -> f a) -> f a
+    {-# INLINE withArch #-}
+    withArch = let x = x in x -- pure (pack System.Info.arch)
 
-    compilerName :: (Applicative m) => m Text
-    {-# INLINE compilerName #-}
-    compilerName = pure (pack System.Info.compilerName)
+    withCompilerName :: (Text -> f a) -> f a
+    {-# INLINE withCompilerName #-}
+    withCompilerName = let x = x in x -- pure (pack System.Info.compilerName)
 
-    compilerVersion :: (Applicative m) => m Version
-    {-# INLINE compilerVersion #-}
-    compilerVersion = pure System.Info.compilerVersion
+    withCompilerVersion :: (Version -> f a) -> f a
+    {-# INLINE withCompilerVersion #-}
+    withCompilerVersion = let x = x in x -- pure System.Info.compilerVersion
 
-    applicationCompiledAt :: (Applicative m) => m UTCTime
-    {-# INLINE applicationCompiledAt  #-}
-    applicationCompiledAt = let x = x in x -- TODO
+    withApplicationCompiledAt :: (UTCTime -> f a) -> f a
+    {-# INLINE withApplicationCompiledAt  #-}
+    withApplicationCompiledAt = let x = x in x -- let x = x in x -- TODO
 
-    applicationVersion :: (Applicative m) => m Version
-    {-# INLINE applicationVersion   #-}
-    applicationVersion = let x = x in x -- TODO
+    withApplicationVersion :: (Version -> f a) -> f a
+    {-# INLINE withApplicationVersion #-}
+    withApplicationVersion = let x = x in x -- let x = x in x -- TODO
 
-    applicationDescription :: (Applicative m) => m Text
-    {-# INLINE applicationDescription    #-}
-    applicationDescription = pure "No description given."
+    withApplicationDescription :: (Text -> f a) -> f a
+    {-# INLINE withApplicationDescription    #-}
+    withApplicationDescription = let x = x in x -- pure "No description given."
+
+
+os :: System f => f Text
+{-# INLINE os #-}
+os = withOS return
+
+arch :: System f => f Text
+{-# INLINE arch #-}
+arch = withArch return
+
+compilerName :: System f => f Text
+{-# INLINE compilerName #-}
+compilerName = withCompilerName return
+
+compilerVersion :: System f => f Version
+{-# INLINE compilerVersion #-}
+compilerVersion = withCompilerVersion return
+
+applicationCompiledAt :: System f => f UTCTime
+{-# INLINE applicationCompiledAt  #-}
+applicationCompiledAt = withApplicationCompiledAt return
+
+applicationVersion :: System f => f Version
+{-# INLINE applicationVersion #-}
+applicationVersion = withApplicationVersion return
+
+applicationDescription :: System f => f Text
+{-# INLINE applicationDescription    #-}
+applicationDescription = withApplicationDescription return

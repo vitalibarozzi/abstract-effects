@@ -3,10 +3,13 @@ module Control.Effect.Class.Store
     )
 where
 
+import Control.Monad
+
 
 -- | Similar to state, but parametized/indexed by a key.
 class 
-    Store key val m 
+    (Monad f)
+    => Store key val f 
   where
-    fetch :: key -> m val
-    store :: key -> (val -> m ())
+    fetch :: key -> f val
+    store :: key -> (val -> f ())

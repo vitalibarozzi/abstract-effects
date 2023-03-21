@@ -9,18 +9,22 @@ import Data.Void
 import Data.Word
 import Data.Functor
 import Prelude ((>))
+import Control.Monad
 
 
-class Exit m where
-    exitWith :: Word8 -> m Void
+class 
+    (Monad f)
+    => Exit f 
+  where
+    exitWith :: Word8 -> f Void
 
 
-exit :: (Exit m, Functor m) => m a
+exit :: (Exit f) => f a
 {-# INLINE exit #-}
 exit = fmap absurd (exitWith 0)
 
 
-exitFailure :: (Exit m, Functor m) => Word8 -> m a
+exitFailure :: (Exit f) => Word8 -> f a
 {-# INLINE exitFailure #-}
 exitFailure n = 
     if n > 0

@@ -8,14 +8,14 @@ where
 import Control.Monad
 
 class 
-    (Monad m)
-    => Input i m 
+    (Monad f)
+    => Input i f 
   where
-    input :: m i
+    input :: f i
 
 
 -- maybe..
-inputs :: (Input i m) => m [i]
+inputs :: (Input i f) => f [i]
 inputs = do
     i <- input
     fmap (i :) inputs

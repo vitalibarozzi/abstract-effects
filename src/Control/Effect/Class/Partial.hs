@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE FlexibleInstances #-}
@@ -40,6 +41,13 @@ class
     partial :: m Void
 
 
+-- | A nullary value in some monad `m`.
+nil :: (Partial m) => m a
+{-# INLINE nil #-}
+nil = 
+    fmap absurd partial
+
+
 -- | Like a `Nothing` in the `Maybe` monad or an empty 
 -- list in the list type.
 -- e.g:
@@ -51,13 +59,6 @@ class
     => Recover m 
   where
     recover :: m ~> Either (m Void)
-
-
--- | A nullary value in some monad `m`.
-nil :: (Partial m) => m a
-{-# INLINE nil #-}
-nil = 
-    fmap absurd partial
 
 
 catches :: (Recover m) => (m Void -> m a) -> (m a -> m a)

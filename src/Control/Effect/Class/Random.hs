@@ -4,7 +4,12 @@ module Control.Effect.Class.Random
     )
 where
 
+import Control.Monad
+
 
 -- | Name chose for been more casual than Non-Det.
-class Random a m where
-    random :: m a
+class 
+    (Monad f)
+    => Random a f 
+  where
+    random :: f a

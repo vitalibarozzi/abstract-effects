@@ -21,6 +21,7 @@ source-repository head
 library
   exposed-modules:
       Control.Effect.Class.Except
+      Control.Effect.Class.Existential
       Control.Effect.Class.Exit
       Control.Effect.Class.Input
       Control.Effect.Class.IO

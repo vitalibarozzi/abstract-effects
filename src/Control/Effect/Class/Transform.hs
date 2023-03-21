@@ -3,15 +3,17 @@
 {-# LANGUAGE UndecidableSuperClasses #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE RankNTypes #-}
-module Control.Monad.Effects.Transform where
+module Control.Effect.Class.Transform where
 
-import Control.Monad
 import Control.Monad.Effects.Helper 
+import Control.Monad
 
 
 -- | Natural transformation as a constraint.
 class 
-    (Monad g) 
-    => (~~>) f g 
+    ( Monad f
+    , Monad g
+    )
+    => f ~~> g 
   where
     transform :: f ~> g
