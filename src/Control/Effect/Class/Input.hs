@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances #-}
+-- | Read-only state effect definition.
 module Control.Effect.Class.Input 
     ( Input(..)
     , inputs

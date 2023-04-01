@@ -11,7 +11,6 @@ where
 
 import Control.Monad
 import Control.Monad.IO.Class
-import Control.Monad.Effects.Helper
 import Prelude ((.), IO)
 
 
@@ -20,7 +19,7 @@ class
     (Monad f)
     => ToIO f 
   where
-    toIO :: f ~> IO
+    toIO :: f a -> IO a
 
 
 -- | UnliftIO alias.
@@ -28,8 +27,8 @@ class
     (Monad f)
     => FromIO f 
   where
-    fromIO :: IO ~> f
+    fromIO :: IO a -> f a
 
 
-throughIO :: (ToIO f, FromIO g) => f ~> g
+throughIO :: (ToIO f, FromIO g) => f a -> g a
 throughIO = fromIO . toIO
