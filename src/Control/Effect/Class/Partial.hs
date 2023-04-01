@@ -6,8 +6,8 @@
 module Control.Effect.Class.Partial 
     ( Partial(..)
     , Recover(..)
+    , Recoverable
     , Void
-    , Fail
     , nil
     , catches
     )
@@ -18,10 +18,9 @@ import Data.Functor
 import Prelude ((.), pure)
 import Control.Monad
 import Data.Void (absurd, Void)
-import Control.Monad.Effects.Helper
 
 
-type Fail m = (Partial m, Recover m)
+type Recoverable m = (Partial m, Recover m)
 
 
 -- | This class is used to prove that the
@@ -41,7 +40,8 @@ class
     partial :: m Void
 
 
--- | A nullary value in some monad `m`.
+-- | A nullary value in some monad `m`. Think `Nothing` for
+-- `Maybe a` and `[]` for `[a]`.
 nil :: (Partial m) => m a
 {-# INLINE nil #-}
 nil = 
@@ -58,7 +58,9 @@ class
     (Monad m) 
     => Recover m 
   where
-    recover :: m ~> Either (m Void)
+  -- TODO should it be
+  -- m Void -> m a -> m a
+    recover :: m a -> Either (m Void) a
 
 
 catches :: (Recover m) => (m Void -> m a) -> (m a -> m a)

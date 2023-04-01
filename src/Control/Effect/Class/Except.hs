@@ -1,5 +1,6 @@
-{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 module Control.Effect.Class.Except
 {-
@@ -14,15 +15,15 @@ module Control.Effect.Class.Except
 where
 
 
-import Prelude (id, (.))
+import Prelude ((.))
 import Data.Either
 import Control.Monad
+import Control.Applicative
 import Control.Exception (Exception,SomeException)
 import Data.Void (Void, absurd)
 
 
-{-
-type Fail m = Except SomeException m
+type Error m = Except SomeException m
 
 
 class 
@@ -30,7 +31,7 @@ class
     => Except e m 
   where
     err :: e -> m Void
-    try :: m a -> Either e (m a)
+    try :: m a -> m (Either e a)
 
 
 throw :: (Except e m) => e -> m a 
@@ -38,8 +39,12 @@ throw :: (Except e m) => e -> m a
 throw = 
     fmap absurd . err
 
+
 catch :: (Except e m) => (m e -> m a) -> (m a -> m a)
 {-# INLINE catch #-}
-catch f ma =
-    either f id (try ma)
--}
+catch f ma = do
+    ea <- try ma
+    case ea of
+        Left e -> f (pure e)
+        Right a -> pure a
+

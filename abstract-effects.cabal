@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 
-name:           effects
+name:           abstract-effects
 version:        0.1.0.1
-homepage:       https://github.com/vitalibarozzi/effects#readme
-bug-reports:    https://github.com/vitalibarozzi/effects/issues
+homepage:       https://github.com/vitalibarozzi/abstract-effects#readme
+bug-reports:    https://github.com/vitalibarozzi/abstract-effects/issues
 author:         Joao Vitor Vitali Barozzi
 maintainer:     vitalivitor@gmail.com
 copyright:      2023 Joao Vitor Vitali Barozzi
@@ -16,13 +16,11 @@ build-type:     Simple
 
 source-repository head
   type: git
-  location: https://github.com/vitalibarozzi/effects
+  location: https://github.com/vitalibarozzi/abstract-effects
 
 library
   exposed-modules:
       Control.Effect.Class.Except
-      Control.Effect.Class.Existential
-      Control.Effect.Class.Exit
       Control.Effect.Class.Input
       Control.Effect.Class.IO
       Control.Effect.Class.Log
@@ -31,14 +29,11 @@ library
       Control.Effect.Class.Random
       Control.Effect.Class.State
       Control.Effect.Class.Store
-      Control.Effect.Class.System
       Control.Effect.Class.Terminal
       Control.Effect.Class.TUI
-      Control.Effect.Class.UI
       Control.Monad.Effects
-      Control.Monad.Effects.Helper
   other-modules:
-      Paths_effects
+      Paths_abstract_effects
   hs-source-dirs:
       src
   default-extensions:

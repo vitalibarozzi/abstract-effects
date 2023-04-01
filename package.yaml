@@ -1,6 +1,6 @@
-name:                effects
+name:                abstract-effects
 version:             0.1.0.1
-github:              "vitalibarozzi/effects"
+github:              "vitalibarozzi/abstract-effects"
 license:             MIT
 author:              "Joao Vitor Vitali Barozzi"
 maintainer:          "vitalivitor@gmail.com"

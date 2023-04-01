@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances #-}
+-- | Write-only state effect definition.
 module Control.Effect.Class.Output 
     ( Output(..)
     , outputs

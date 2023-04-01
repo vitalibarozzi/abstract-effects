@@ -6,7 +6,7 @@ where
 import Control.Monad
 
 
--- | Similar to state, but parametized/indexed by a key.
+-- | Similar to `State`, but parametized/indexed by a key.
 class 
     (Monad f)
     => Store key val f 
