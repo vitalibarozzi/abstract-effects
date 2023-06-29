@@ -22,6 +22,7 @@ library
   exposed-modules:
       Control.Effect.Class.Except
       Control.Effect.Class.Input
+      Control.Effect.Class.Interface
       Control.Effect.Class.IO
       Control.Effect.Class.Log
       Control.Effect.Class.Output
@@ -29,8 +30,9 @@ library
       Control.Effect.Class.Random
       Control.Effect.Class.State
       Control.Effect.Class.Store
-      Control.Effect.Class.Terminal
-      Control.Effect.Class.TUI
+      Control.Effect.Class.Store.ToState
+      Control.Effect.Class.Time
+      Control.Effect.Process
       Control.Monad.Effects
   other-modules:
       Paths_abstract_effects

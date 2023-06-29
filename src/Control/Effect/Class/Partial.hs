@@ -20,6 +20,7 @@ import Control.Monad
 import Data.Void (absurd, Void)
 
 
+-- TODO call this Except
 type Recoverable m = (Partial m, Recover m)
 
 
@@ -33,10 +34,7 @@ type Recoverable m = (Partial m, Recover m)
 -- ```instance Partial Maybe where
 --        partial = Nothing
 -- ```
-class 
-    (Monad m) 
-    => Partial m 
-  where
+class (Monad m) => Partial m where
     partial :: m Void
 
 
@@ -54,13 +52,10 @@ nil =
 -- ```instance Recover Maybe where
 --        recover = maybe (Left partial) Right
 -- ```
-class 
-    (Monad m) 
-    => Recover m 
-  where
+class (Monad m) => Recover m where
   -- TODO should it be
   -- m Void -> m a -> m a
-    recover :: m a -> Either (m Void) a
+    recover :: m a -> Either (m Void) (m a)
 
 
 catches :: (Recover m) => (m Void -> m a) -> (m a -> m a)

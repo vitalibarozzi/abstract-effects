@@ -11,10 +11,8 @@ import Control.Monad (Monad, (>>=))
 import Control.Applicative (pure)
 import Data.Functor (fmap)
 
-class 
-    (Monad m)
-    => State s m 
-  where
+class (Monad m) => State s m where
+    -- try ((s,a) -> (s,b)) -> (a -> m b)
     get :: m s
     put :: s -> m ()
 
@@ -28,8 +26,7 @@ gets l =
 modify :: (State s m) => (s -> s) -> m ()
 {-# INLINE modify #-}
 modify k =
-    let mk = pure . k
-    in get >>= mk >>= put
+    modifyM (pure . k)
 
 
 modifyM :: (State s m) => (s -> m s) -> m ()

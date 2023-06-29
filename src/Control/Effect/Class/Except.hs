@@ -26,10 +26,7 @@ import Data.Void (Void, absurd)
 type Error m = Except SomeException m
 
 
-class 
-    (Monad m, Exception e) 
-    => Except e m 
-  where
+class (Monad m, Exception e) => Except e m  where
     err :: e -> m Void
     try :: m a -> m (Either e a)
 
