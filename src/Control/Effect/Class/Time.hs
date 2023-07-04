@@ -1,5 +1,5 @@
 {-# LANGUAGE ImpredicativeTypes #-}
-module Control.Effect.Class.Terminal 
+module Control.Effect.Class.Time 
     ( Time(..)
     , Timer(..)
     , elapsed
@@ -7,8 +7,9 @@ module Control.Effect.Class.Terminal
     ) 
 where
 
-
+import Prelude
 import Data.Time
+import Data.Kind
 
 
 class (Monad m) => Time m where
@@ -19,13 +20,13 @@ class (Monad m) => Timer m where
     withTimer :: (Timed m => m a) -> m a
 
 
-type Timed m = ?_t0 :: UTCTime
+type Timed (m::Type->Type) = ?_t0 :: UTCTime
 
 
 elapsed :: (Time m) => (Timed m => m NominalDiffTime)
 elapsed = do
     t1 <- now
-    pure (addUTCTime (t1 - ?_t0))
+    undefined -- pure (addUTCTime (t1 - ?_t0))
 
 
 

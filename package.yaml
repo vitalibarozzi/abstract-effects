@@ -10,10 +10,15 @@ dependencies:
 - base >= 4.7 && < 5
 - text
 - time
+- process
 
 default-extensions:
 - MultiParamTypeClasses
 - NoImplicitPrelude
+- ImplicitParams
+- RankNTypes
+- ConstraintKinds
+- KindSignatures
 
 ghc-options:
 - -Wall

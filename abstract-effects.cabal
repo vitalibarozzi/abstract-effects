@@ -21,18 +21,21 @@ source-repository head
 library
   exposed-modules:
       Control.Effect.Class.Except
+      Control.Effect.Class.FileSystem
       Control.Effect.Class.Input
-      Control.Effect.Class.Interface
       Control.Effect.Class.IO
       Control.Effect.Class.Log
+      Control.Effect.Class.Loop
       Control.Effect.Class.Output
+      Control.Effect.Class.Parallel
       Control.Effect.Class.Partial
+      Control.Effect.Class.Process
       Control.Effect.Class.Random
       Control.Effect.Class.State
       Control.Effect.Class.Store
       Control.Effect.Class.Store.ToState
+      Control.Effect.Class.Terminal
       Control.Effect.Class.Time
-      Control.Effect.Process
       Control.Monad.Effects
   other-modules:
       Paths_abstract_effects
@@ -41,9 +44,14 @@ library
   default-extensions:
       MultiParamTypeClasses
       NoImplicitPrelude
+      ImplicitParams
+      RankNTypes
+      ConstraintKinds
+      KindSignatures
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wno-redundant-constraints
   build-depends:
       base >=4.7 && <5
+    , process
     , text
     , time
   default-language: Haskell2010

@@ -6,15 +6,24 @@
 module Control.Effect.Class.Process where
 
 import Data.Either
+import Data.Maybe
 import Data.Functor
 import Prelude ((.), pure)
 import Control.Monad
 import Data.Void (absurd, Void)
 import System.Process
+import System.IO
 
 
--- TODO if you use handle and process handle why just dont use CreateProcess and remove this extra argument from the class?
-class Process p m where
-    spawn :: p -> m Pid
-    foooo :: Pid -> m (Maybe Handle, Maybe Handle, Maybe Handle, ProcessHandle)
+class (Monad m) => Process m where
+    process :: CreateProcess -> m Pid
+    handles :: Pid -> m Handles
+
+
+type Handles = (Maybe Handle, Maybe Handle, Maybe Handle, ProcessHandle)
+
+
+createProcess :: (Process m) => CreateProcess -> m Handles
+createProcess = 
+    process >=> handles
 

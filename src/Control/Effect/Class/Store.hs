@@ -3,7 +3,9 @@ module Control.Effect.Class.Store
     )
 where
 
+import Prelude
 import Control.Monad
+import Data.Maybe
 
 
 -- | Similar to `State`, but parametized/indexed by a key.

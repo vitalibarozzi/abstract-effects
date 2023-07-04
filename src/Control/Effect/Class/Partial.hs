@@ -15,7 +15,7 @@ where
 
 import Data.Either
 import Data.Functor
-import Prelude ((.), pure)
+import Prelude (undefined,(.), pure)
 import Control.Monad
 import Data.Void (absurd, Void)
 
@@ -61,4 +61,4 @@ class (Monad m) => Recover m where
 catches :: (Recover m) => (m Void -> m a) -> (m a -> m a)
 {-# INLINE catches #-}
 catches f =
-    either f pure . recover
+    undefined -- either f pure . recover
